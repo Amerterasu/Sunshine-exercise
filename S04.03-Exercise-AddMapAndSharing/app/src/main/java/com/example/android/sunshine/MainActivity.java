@@ -211,6 +211,13 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         return true;
     }
 
+    private void showMap(){
+        String address = "1600 Ampitheatre Parkway, CA";
+        Uri.Builder builder = new Uri.Builder();
+        Uri locationUri = builder.scheme("geo").path("0,0").appendQueryParameter("q", address).build();
+        Intent showMapIntent = new Intent(Intent.ACTION_VIEW, locationUri);
+        startActivity(showMapIntent);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -218,6 +225,9 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         if (id == R.id.action_refresh) {
             mForecastAdapter.setWeatherData(null);
             loadWeatherData();
+            return true;
+        }else if (id == R.id.action_map){
+            showMap();
             return true;
         }
 
